@@ -38,12 +38,17 @@ class DataPrepper:
 
         # Delete file after response. By default it takes 2 days for Google to delete your temp files.
         genai.delete_file(sample_file.name)
-        print('Deleted file')
+        print('Deleted the uploaded file')
 
-        cleaned_text = response.text.replace("`", "")
-        desc = eval(cleaned_text)
-
-        return desc
+        cleaned_text = response.text.translate(str.maketrans('', '', '\\`{}')).replace('text', '')
+        try:
+            desc = eval(cleaned_text)
+            return desc
+        except Exception as e:
+            print(e)
+            print(cleaned_text)
+            print(f"Error occured on {img_path}, check txt file.")
+            return [cleaned_text]
 
     def write_file(self, file_name: str, text_list: list[str]) -> None:
         """

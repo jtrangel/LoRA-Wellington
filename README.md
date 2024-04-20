@@ -7,7 +7,7 @@ As of today April 20th 2024, Google Gemini Pro 1.5 API is free for use until May
 
 Steps taken to get from pictures of a subject to custom AI image generation.
 
-1. Collect images of test subject into a directory. i.e. Wellington
+1. Collect images of test subject into a directory and add a `5_` prefix to denote the training repeats. i.e. 5_Wellington
 2. Open `main.py` and edit the folder name into `dir_path` and add labels for the name of your subject
 3. Run `python main.py` in order to do the ff:
     - Standardize file names in directory (1.jpg, 2.jpg, 3.jpg)

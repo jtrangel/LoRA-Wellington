@@ -4,7 +4,7 @@ import time
 from prepper import DataPrepper
 
 if __name__ == '__main__':
-    dir_path = 'Wellington'
+    dir_path = '5_Wellington'
     pet_names = ["Wellington", "Ton", "Tonny", "Tonnybear", "Beefer", "Wellington Beef"]
 
     prepper = DataPrepper(data_path=dir_path)

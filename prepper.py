@@ -32,16 +32,33 @@ class DataPrepper:
 
         # Upload file to Gemini API
         sample_file = genai.upload_file(path=img_path, display_name="test file")
-        print(f"Uploaded file '{sample_file.display_name}' as: {sample_file.uri}")
+        print(f"Uploaded jpg file as: {sample_file.uri}")
 
         response = self.model.generate_content(contents=text_prompt + [sample_file])
-        print(response.text)
 
         # Delete file after response. By default it takes 2 days for Google to delete your temp files.
         genai.delete_file(sample_file.name)
-        print(f'Deleted {sample_file.display_name}.')
+        print('Deleted file')
 
-        return response.text
+        cleaned_text = response.text.replace("`", "")
+        desc = eval(cleaned_text)
+
+        return desc
+
+    def write_file(self, file_name: str, text_list: list[str]) -> None:
+        """
+        Utility function to write out the descriptions of images to corresponding text files.
+
+        Args:
+            file_name (str): Name of the file to be written.
+            text_list (list[str]): List of adjectives describing file/image
+        """
+        text_content = ", ".join(text_list) + "\n"
+
+        with open(f"{self.data_path}/{file_name}.txt", "w") as file:
+            file.write(text_content)
+
+        print(f"Wrote {file_name}.txt")
 
     def setup_dir(self) -> None:
         """
@@ -55,7 +72,6 @@ class DataPrepper:
 
             # No need to rename if file is already in format
             if self.is_integer(os.path.splitext(filename)[0]):
-                print(filename)
                 break
 
             extension = os.path.splitext(filename)[1]  # .jpg in this case
@@ -64,7 +80,7 @@ class DataPrepper:
             os.rename(os.path.join(self.data_path, filename), os.path.join(self.data_path, new_filename))
             counter += 1
 
-        print("Files renamed.")
+        print("Directory set up.")
 
     @staticmethod
     def is_integer(text: str) -> bool:

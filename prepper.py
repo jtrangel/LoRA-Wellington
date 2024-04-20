@@ -4,6 +4,12 @@ import google.generativeai as genai
 
 
 class DataPrepper:
+    """
+    Prepares image data for usage with a LoRA training model via Dreambooth.
+
+    Attributes:
+        data_path (str): path where the data is stored locally.
+    """
     def __init__(self, data_path: str):
         # Environment
         load_dotenv()
@@ -13,13 +19,13 @@ class DataPrepper:
 
     def describe_img(self, img_path: str) -> list[str]:
         """
-        Calls Gemini API to retrieve keyword descriptions of an image
+        Calls Gemini API to retrieve keyword descriptions of an image.
 
         Args:
-            img_path (str): Image path, specifically the name
+            img_path (str): Image path, specifically the name.
 
         Returns:
-            list[str]: List of adjectives/keywords describing image
+            list[str]: List of adjectives/keywords describing image.
         """
         text_prompt = ["Describe the image using 15 parameters/keywords. Output an array of these keywords as strings.\
                        Try to use as many adjectives as possible"]
@@ -39,7 +45,7 @@ class DataPrepper:
 
     def setup_dir(self) -> None:
         """
-        Utility function to format a directory with the correct filenames
+        Utility function to format a directory with the correct filenames.
         """
 
         counter = 1

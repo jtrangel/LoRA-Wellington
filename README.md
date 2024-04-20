@@ -18,6 +18,7 @@ Steps taken to get from pictures of a subject to custom AI image generation.
       ![img_1.png](imgs/img_1.png)
 4. Upload directory into Google Drive.
 5. Run LoRA training using the dreambooth method, as per specified in this [reddit post](https://www.reddit.com/r/StableDiffusion/comments/110up3f/i_made_a_lora_training_guide_its_a_colab_version/#lightbox).
+6. Import the `.safetensors` files into Stable Diffusion. To get the web ui, follow this [guide](https://www.youtube.com/watch?v=onmqbI5XPH8).
 
 Steps 4 and 5 just follow the guide, and the contents of this repository are mainly for automation of the labelling process.
 
